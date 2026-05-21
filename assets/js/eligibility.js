@@ -97,8 +97,8 @@ document.addEventListener("data:ready", (e) => {
 
     // 3) 일반공급 순위
     let rank = "";
-    if (a.savings === "s24") { rank = "일반공급 1순위 가능"; items.push(["✓", "일반공급 순위", rank + " (가입 24개월+24회 충족)"]); }
-    else if (a.savings === "s6") { rank = "일반공급 2순위"; items.push(["!", "일반공급 순위", "1순위 요건(24개월/24회) 미달 → 2순위로 신청 가능"]); }
+    if (a.savings === "s24") { rank = "일반공급 1순위 가능"; items.push(["✓", "일반공급 순위", rank + " (1순위 통장요건 충족)"]); }
+    else if (a.savings === "s6") { rank = "일반공급 2순위"; items.push(["!", "일반공급 순위", "1순위 통장요건 미달 → 2순위로 신청 가능"]); }
     else { rank = "통장 요건 미충족"; items.push(["✕", "일반공급 순위", "청약통장 6회 이상 납입이 필요합니다."]); cls = cls === "ok" ? "warn" : cls; }
 
     // 4) 특별공급

@@ -17,6 +17,7 @@ window.fmt = { won, eok, fmtDate };
 
 window.dataReady.then((data) => {
   window.__DATA = data;
+  renderAds(data.meta);
   renderHero(data);
   renderInfo(data);
   renderShow(data);
@@ -24,6 +25,30 @@ window.dataReady.then((data) => {
   renderCountdown(data);
   document.dispatchEvent(new CustomEvent("data:ready", { detail: data }));
 });
+
+/* Google AdSense — meta.adsense.client(ca-pub-…)가 있을 때만 동작.
+   slots(inContent1/inContent2)가 있으면 본문 광고 유닛, 없으면 자동광고(대시보드 설정)로 노출. */
+function renderAds(m) {
+  const ad = m && m.adsense;
+  if (!ad || !ad.client) return;
+  const loader = document.createElement("script");
+  loader.async = true;
+  loader.crossOrigin = "anonymous";
+  loader.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + ad.client;
+  document.head.appendChild(loader);
+  const slots = ad.slots || {};
+  const place = (afterId, slotId) => {
+    const sec = document.getElementById(afterId);
+    if (!sec || !slotId) return;
+    const wrap = document.createElement("div");
+    wrap.className = "ad-wrap wrap";
+    wrap.innerHTML = `<ins class="adsbygoogle" style="display:block" data-ad-client="${ad.client}" data-ad-slot="${slotId}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
+    sec.after(wrap);
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+  };
+  place("info", slots.inContent1);
+  place("calc", slots.inContent2);
+}
 
 fetch("./data/clauses.json").then((r) => r.json()).then(renderClauses).catch(() => {});
 

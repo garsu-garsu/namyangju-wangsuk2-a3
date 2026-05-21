@@ -238,6 +238,10 @@ footer .ft-top { font-weight: 800; color: #fff; font-size: 1.05rem; margin-botto
 .tp .tp-t { font-weight: 700; }
 .tp .tp-d { color: var(--gray-500); font-size: 0.9rem; }
 
+/* ===== AdSense ===== */
+.ad-wrap { margin: 26px auto; text-align: center; min-height: 0; }
+.ad-wrap ins { margin: 0 auto; }
+
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
   .calc-grid { grid-template-columns: 1fr; }
