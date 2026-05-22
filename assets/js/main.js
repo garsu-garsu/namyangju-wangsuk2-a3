@@ -149,10 +149,11 @@ function renderClauses(list) {
   const wrap = document.getElementById("clauseCards");
   if (!wrap) return;
   const icons = { price: "💰", option: "🏠", schedule: "📅", special: "🎁", income_asset: "📊", selection: "🎯", documents: "📑", loan_tax: "🏦", eligibility: "✅", movein: "🔑", overview: "🏢", notice: "ℹ️" };
-  wrap.innerHTML = list.map((c) => `<a class="card" href="./clauses/${c.file}" target="_blank" rel="noopener" style="display:block">
+  wrap.innerHTML = list.map((c) => `<a class="card" href="./clause.html?id=${c.id}" style="display:block;text-decoration:none">
     <div class="icon-badge">${icons[c.id] || "📄"}</div>
     <h3>${c.title}</h3>
     <div class="muted">공고문 ${c.pages[0]}–${c.pages[1]}p · ${c.blocks}개 조항</div>
+    <div style="margin-top:10px;font-size:.82rem;color:var(--forest-600);font-weight:700">자세히 보기 →</div>
   </a>`).join("");
 }
 
